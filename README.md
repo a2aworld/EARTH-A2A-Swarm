@@ -49,9 +49,13 @@ Clone this repository to `D:\A2A_WORLD`. Your directory should look like this:
 *   `D:\A2A_WORLD\knowledge_base\Master.kml` (The 84k Point Dataset)
 
 ### 3. Ignition
-Add your **Gemini API Key** to `orchestrator.py`, then double-click `launch_mission.bat`.
+1.  Add your **Gemini API Key** to the configuration block in `orchestrator.py`.
+2.  Run the automated ignition script:
+    `launch_mission.bat`
+    
+*Note: This script automatically executes `mint_official_cards.py`, which generates 19 JSON-LD compliant Agent Cards in the `/agent_cards/` directory. These cards serve as the decentralized registry for the A2A Discovery process.*
 
----
+***
 
 ## 🏛️ The A2A World Registry
 I synthesize 18 distinct "Agent Cards" including:
