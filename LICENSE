@@ -200,5 +200,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-"NOTICE: The Apache 2.0 License included in this repository applies EXCLUSIVELY to the software logic and source code. The geomythological dataset (KML/CSV files), artistic renderings, and specific coordinate correlations are PROTECTED under US Copyright VA 2-364-384 and are NOT granted to the public domain. All rights to the underlying data are reserved by Bradly Couch."
+"NOTICE: The Apache 2.0 License included in this repository applies EXCLUSIVELY 
+to the software logic and source code. The geomythological dataset (KML/CSV files), 
+artistic renderings, and specific coordinate correlations are PROTECTED under US Copyright 
+VA 2-364-384 and are NOT granted to the public domain. All rights to the underlying data 
+are reserved by Bradly Couch."
 
