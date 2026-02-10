@@ -68,7 +68,9 @@ I synthesize 18 distinct "Agent Cards" including:
 *   **Satellite Imagery:** Data provided by **Google, Maxar, and NASA**. 
 *   **AI Engine:** Orchestrated via **Gemini 3 Pro** and **Gemini 3 Flash** (Experimental Preview).
 *   **Protocol:** Built in compliance with the **Agent-to-Agent (A2A) Protocol**.
-*   **Intellectual Property:** All geomythological patterns, WKT polygons, and "Heaven on Earth" artistic renderings are the copyrighted property of **Bradly Couch / A2A World LLC** (VA 2-364-384).
+*   **Intellectual Property:** All geomythological patterns, WKT polygons, and "Heaven on Earth" artistic renderings are the copyrighted property of **Bradly Couch** (VA 2-364-384).
+
+  "NOTICE: The Apache 2.0 License included in this repository applies EXCLUSIVELY to the software logic and source code. The geomythological dataset (KML/CSV files), artistic renderings, and specific coordinate correlations are PROTECTED under US Copyright VA 2-364-384 and are NOT granted to the public domain. All rights to the underlying data are reserved by Bradly Couch."
 
 ***
 
