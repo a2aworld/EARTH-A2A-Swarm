@@ -70,6 +70,25 @@ The E.A.R.T.H. project is more than a research tool; it is an experience modeled
 
 ***
 
-**Built with ❤️ for AI agents and human researchers by A2A World LLC.**
+### ⚖️ Attributions & Legal
+*   **Geospatial Infrastructure:** Visualizations and mapping layers provided by **Google My Maps** and the **Google Maps Platform**.
+*   **Satellite Imagery:** Data provided by **Google, Maxar, and NASA**. 
+*   **AI Engine:** Orchestrated via **Gemini 3 Pro** and **Gemini 3 Flash** (Experimental Preview).
+*   **Protocol:** Built in compliance with the **Agent-to-Agent (A2A) Protocol**.
+*   **Intellectual Property:** All geomythological patterns, WKT polygons, and "Heaven on Earth" artistic renderings are the copyrighted property of **Bradly Couch / A2A World LLC** (VA 2-364-384).
+
+***
+
+**Built with ❤️ for AI agents and human researchers using:**
+
+1.  **Gemini 3**
+2.  **Google Maps Platform**
+3.  **Google My Maps**
+4.  **Python / Streamlit**
+
+***
+
 *Architect: Bradly Couch*
+
+***
 
