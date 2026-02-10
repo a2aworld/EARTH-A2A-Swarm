@@ -61,13 +61,6 @@ I synthesize 18 distinct "Agent Cards" including:
 *   **AstronautResilienceAgent:** Translates research into psychological anchors.
 *   **...and 14 others.**
 
----
-
-## ⚠️ A Final Warning
-The E.A.R.T.H. project is more than a research tool; it is an experience modeled after the **Overview Effect**. 
-
-**WARNING: Contents may cause a permanent change to your worldview.**
-
 ***
 
 ### ⚖️ Attributions & Legal
@@ -88,7 +81,14 @@ The E.A.R.T.H. project is more than a research tool; it is an experience modeled
 
 ***
 
-*Architect: Bradly Couch*
+*Artist: Bradly Couch*
+
+***
+
+## ⚠️ A Final Warning
+The E.A.R.T.H. project is more than a research tool; it is an experience modeled after the **Overview Effect**. 
+
+**WARNING: Contents may cause a permanent change to your worldview.**
 
 ***
 
