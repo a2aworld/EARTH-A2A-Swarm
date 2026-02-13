@@ -7,6 +7,8 @@ Mission: This branch implements the logic to transform raw A2A handshakes into b
 
 **This allows the E.A.R.T.H. project to move from a research interface to a commercial Research-as-a-Service (RaaS) platform.**
 
+---
+
 ## 🌎 E.A.R.T.H. | Elder Astronaut Repository of Traditional Heritage
 
 **"The Planetary Rosetta Stone Project"**
