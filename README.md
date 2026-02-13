@@ -1,4 +1,9 @@
-# 🌎 E.A.R.T.H. | Elder Astronaut Repository of Traditional Heritage
+## 🛠️ Branch: feature/synthetic-reporting-agent (WORK IN PROGRESS)
+Status: Active Research
+Objective: Developing the 19th agent in the E.A.R.T.H. Swarm—the Report Stylist.
+Mission: This branch implements the logic to transform raw A2A handshakes into branded, professional PDF Research Dossiers. This allows the E.A.R.T.H. project to move from a research interface to a commercial Research-as-a-Service (RaaS) platform.
+
+## 🌎 E.A.R.T.H. | Elder Astronaut Repository of Traditional Heritage
 
 **"The Planetary Rosetta Stone Project"**
 
