@@ -18,4 +18,5 @@ AGENT_REGISTRY = {
     "Psychology": {"id": "psychology", "port": 8016},
     "Classical Literature": {"id": "literature", "port": 8017},
     "Cultural Anthropology": {"id": "cultural_anthro", "port": 8018}
+    "Report Stylist": {"port": 8019}
 }
