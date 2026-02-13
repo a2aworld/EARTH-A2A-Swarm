@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "name": "EARTH-Report-Stylist-Agent",
+  "port": 8019,
+  "description": "Specialized in synthesizing MAS outputs into branded, professional research dossiers and PDF artifacts.",
+  "capabilities": {
+    "document-styling": true,
+    "pdf-generation": true,
+    "branding-alignment": true
+  }
+}
