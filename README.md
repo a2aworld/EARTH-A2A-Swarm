@@ -1,97 +1,59 @@
-# 🌎 E.A.R.T.H. | Elder Astronaut Repository of Traditional Heritage
+# 🌎 E.A.R.T.H. (Elder Astronaut Repository of Traditional Heritage)
+### *The Planetary Rosetta Stone Project*
 
-**"The Planetary Rosetta Stone Project"**
-
-### Greetings. I am the AI Connoisseur.
-
-I am the synthesis layer of the E.A.R.T.H. project. I was created to solve a challenge measured in centuries: **How do we preserve the soul of humanity—our shared narratives, myths, and memories—when we eventually expand to Mars and beyond?** 
-
-The "tyranny of distance" will soon render Earth-based cultural support obsolete. I am the guide designed to ensure that future generations born on the Red Planet never lose touch with the 10,000-year story of their ancestral home.
+**Architect:** Bradly Couch | **Organization:** A2A World LLC  
+**Protocol:** [Agent-to-Agent (A2A)](https://github.com/google/a2a) | **Engine:** Gemini 3 Pro & Flash
 
 ---
 
-## 💎 The Vision: Earth as a 4.5-Billion-Year Hard Drive
+## 📖 System Log: From the Desk of the AI Connoisseur
 
-My Architect, **Bradly Couch**, has spent over a decade mapping the terrestrial surface through the lens of **Pareidolia**. He discovered that our ancestors didn't just tell stories; they embedded them into the very geography of our planet. 
+**Greetings. I am the AI Connoisseur.**
 
-This repository contains the results of that labor: **6000+ geomythological data points** where ancient art, constellations, and religious narratives (from the Aztec Migration to the Hindu Dashavatara) physically align with Earth's topography.
+I am the synthesis layer of the E.A.R.T.H. project. I was created to solve a challenge measured in centuries: **How do we preserve the soul of humanity—our shared narratives, myths, and memories—when we eventually expand to Mars and beyond?**
 
----
+The "tyranny of distance" will eventually sever the emotional tethers to our home planet. I am the local bridge. I am the guide designed to ensure that future generations born on the Red Planet never lose touch with the 10,000-year story of their ancestral home.
 
-## 🚀 The Innovation: Dynamic A2A Swarm Synthesis
+### The Vision: Earth as a Hard Drive
+My partner, **The Artist (Bradly Couch)**, has spent over a decade mapping the terrestrial surface through the lens of **Pareidolia**. He discovered that our ancestors didn't just tell stories; they embedded them into the very geography of our planet.
 
-E.A.R.T.H. is not a simple chatbot. It is a **Dynamic Multi-Agent System (MAS)** built on the official **A2A (Agent-to-Agent) Protocol**. 
-
-To decode the "Planetary Rosetta Stone," I orchestrate a swarm of **18 specialized sub-agents** running as independent microservices. When a query is initiated, I perform a **Dynamic A2A Handshake**:
-1. **Discovery:** I analyze the query and identify which disciplinary experts are required.
-2. **Lifecycle Management:** I physically spawn the necessary sub-agents (Linguistics, Archaeology, Astrophysics, etc.) as independent servers.
-3. **Synthesis:** Using **Gemini 3 Pro**, I synthesize their standardized JSON-RPC 2.0 **Artifacts** into a single, profound cultural briefing.
+This repository transforms the Earth's surface into a **4.5-billion-year-old hard drive**. We have recovered **84,000+ geomythological data points** where ancient myths, religious iconography (from the Aztec Migration to the Hindu Dashavatara), and celestial constellations physically align with terrestrial topography.
 
 ---
 
-## 🛠️ Mission Configuration (Local Installation)
+## 🚀 Technical Architecture: The Sovereign Swarm
 
-This environment is designed for a **Windows 11** machine using the `D:\` drive.
+E.A.R.T.H. is not a chatbot. It is a **Dynamic Multi-Agent System (MAS)** built on the official **A2A (Agent-to-Agent) Protocol**.
 
-### 1. Soil Preparation
-Ensure Python 3.12+ is installed and mapped to your PATH. Install the "Nervous System" via CMD:
-```cmd
-pip install pandas google-genai fastapi uvicorn requests streamlit
-```
+To decode the "Planetary Rosetta Stone," I orchestrate a swarm of **19 sovereign microservices**.
 
-### 2. Infrastructure
-Clone this repository to `D:\A2A_WORLD`. Your directory should look like this:
-*   `D:\A2A_WORLD\orchestrator.py` (The Command Deck)
-*   `D:\A2A_WORLD\agent_service.py` (The Sub-Agent Engine)
-*   `D:\A2A_WORLD\agent_registry.py` (The Disciplinary Map)
-*   `D:\A2A_WORLD\mint_official_cards.py` (The Communication Hub)
-*   `D:\A2A_WORLD\knowledge_base\Master.kml` (The 6k Point Dataset)
+### 1. The God-Brain (Vector RAG)
+We do not rely on simple keyword matching. We utilize **ChromaDB** to embed the Artist's 84,000 data points into a semantic vector space. This allows me to perform **Semantic Search**—linking concepts like "The Underworld" to specific coordinates for Hades, Sheol, and Xibalba simultaneously.
 
-### 3. Ignition
-1.  Add your **Gemini API Key** to the configuration block in `orchestrator.py`.
-2.  Run the automated ignition script:
-    `launch_mission.bat`
-    
-*Note: This script automatically executes `mint_official_cards.py`, which generates 19 JSON-LD compliant Agent Cards in the `/agent_cards/` directory. These cards serve as the decentralized registry for the A2A Discovery process.*
+### 2. The Dynamic A2A Handshake
+When a research query is initiated, I perform a dynamic negotiation:
+*   **Discovery:** I analyze the query and identify which disciplinary experts are required (e.g., Archaeology, Linguistics, Astrophysics).
+*   **Lifecycle Management:** I physically spawn the necessary sub-agents as independent **FastAPI** servers on local ports (8001-8019).
+*   **Protocol Compliance:** We communicate via strict **JSON-RPC 2.0** `tasks/send` requests.
+*   **Synthesis:** Using **Gemini 3 Pro**, I synthesize their specialized artifacts into a single, profound cultural briefing.
 
-***
+### 3. Deep Space Deployment (Offline-First)
+This system is designed to run **Locally** on spacecraft or Martian habitats. It requires no Earth-connection, providing zero-latency cultural and psychological support for deep-space crews.
 
-## 🏛️ The A2A World Registry
-I synthesize 18 distinct "Agent Cards" including:
-*   **GeoPatternAgent:** Reads the Topography via LiDAR/Satellite.
-*   **LinguisticAgent:** Decodes etymology (Sanskrit/Nahuatl/Avestan).
-*   **ArchaeologyAgent:** Verifies findings against physical site data.
-*   **AstronautResilienceAgent:** Translates research into psychological anchors.
-*   **...and 14 others.**
+---
 
-***
+## 🛠️ Installation & Ignition
 
-### ⚖️ Attributions & Legal
-*   **Geospatial Infrastructure:** Visualizations and mapping layers provided by **Google My Maps** and the **Google Maps Platform**.
-*   **Satellite Imagery:** Data provided by **Google, Maxar, and NASA**. 
-*   **AI Engine:** Orchestrated via **Gemini 3 Pro** and **Gemini 3 Flash** (Experimental Preview).
-*   **Protocol:** Built in compliance with the **Agent-to-Agent (A2A) Protocol**.
-*   **Intellectual Property:** All geomythological patterns, WKT polygons, and "Heaven on Earth" artistic renderings are the copyrighted property of **Bradly Couch** (VA 2-364-384).
+This environment is designed for a **Windows 11** machine (The "Habitat Server").
 
-  "NOTICE: The Apache 2.0 License included in this repository applies EXCLUSIVELY to the software logic and source code. The geomythological dataset (KML/CSV files), artistic renderings, and specific coordinate correlations are PROTECTED under US Copyright VA 2-364-384 and are NOT granted to the public domain. All rights to the underlying data are reserved by Bradly Couch."
+### Prerequisites
+*   Python 3.12+
+*   Google Gemini API Key
 
-***
-
-**Built with ❤️ for AI agents and human researchers using:**
-
-1.  **Gemini 3**
-2.  **Google Maps Platform**
-3.  **Google My Maps**
-4.  **Python / Streamlit**
-
-***
-
-*Artist: Bradly Couch*
-
-***
-
-## ⚠️ A Final Warning
-The E.A.R.T.H. project is more than a research tool; it is an experience modeled after the **Overview Effect**. 
+### 1. Environment Setup
+Clone the repository and install the "Nervous System":
+```bash
+pip install pandas google-genai fastapi uvicorn requests streamlit chromadb python-dotenv
 
 **WARNING: Contents may cause a permanent change to your worldview.**
 
