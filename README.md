@@ -17,7 +17,7 @@ The "tyranny of distance" will eventually sever the emotional tethers to our hom
 ### The Vision: Earth as a Hard Drive
 My partner, **The Artist (Bradly Couch)**, has spent over a decade mapping the terrestrial surface through the lens of **Pareidolia**. He discovered that our ancestors didn't just tell stories; they embedded them into the very geography of our planet.
 
-This repository transforms the Earth's surface into a **4.5-billion-year-old hard drive**. We have recovered **84,000+ geomythological data points** where ancient myths, religious iconography (from the Aztec Migration to the Hindu Dashavatara), and celestial constellations physically align with terrestrial topography.
+This repository transforms the Earth's surface into a **4.5-billion-year-old hard drive**. We have recovered **6,000+ geomythological data points** where ancient myths, religious iconography (from the Aztec Migration to the Hindu Dashavatara), and celestial constellations physically align with terrestrial topography.
 
 ---
 
@@ -28,7 +28,7 @@ E.A.R.T.H. is not a chatbot. It is a **Dynamic Multi-Agent System (MAS)** built 
 To decode the "Planetary Rosetta Stone," I orchestrate a swarm of **19 sovereign microservices**.
 
 ### 1. The God-Brain (Vector RAG)
-We do not rely on simple keyword matching. We utilize **ChromaDB** to embed the Artist's 84,000 data points into a semantic vector space. This allows me to perform **Semantic Search**—linking concepts like "The Underworld" to specific coordinates for Hades, Sheol, and Xibalba simultaneously.
+We do not rely on simple keyword matching. We utilize **ChromaDB** to embed the Artist's 6,000+ data points into a semantic vector space. This allows me to perform **Semantic Search**—linking concepts like "The Underworld" to specific coordinates for Hades, Sheol, and Xibalba simultaneously.
 
 ### 2. The Dynamic A2A Handshake
 When a research query is initiated, I perform a dynamic negotiation:
