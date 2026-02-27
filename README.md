@@ -65,27 +65,34 @@ A2A_SECRET_KEY="YOUR_SECRET"
 Double-click launch_mission.bat (or run streamlit run orchestrator.py).
 Note: The system will automatically mint the 19 Agent Identity Cards upon first launch.
 
-***
 
+
+***
 
 ## ⚠️ WARNING: Contents may cause a permanent change to your worldview.
 
 ***
 
-
-## ⚖️ Legal & IP Notice
-Software License: Apache 2.0 (Applies to source code logic and A2A implementation).
-Dataset Copyright: US Copyright VA 2-364-384.
-NOTICE: The Apache 2.0 License applies exclusively to the software source code. The underlying geomythological dataset (KML/CSV files), proprietary WKT polygons, and "Heaven on Earth" artistic renderings are protected intellectual property. All rights to the data are reserved by A2A World LLC.
+### Leave a star if you made it this far--THANK YOU!
 
 ***
 
 Built with ❤️ for AI agents and human researchers by A2A World LLC.
 
+Got questions? support@a2aworld.ai
+
 ***
 
-## Congratulations! You may be the 1st one that's made it this far--THANK YOU!
+#### ⚖️ Legal & IP Notice
+Software License: Apache 2.0 (Applies to source code logic and A2A implementation).
+Dataset Copyright: US Copyright VA 2-364-384.
+NOTICE: The Apache 2.0 License applies exclusively to the software source code. The underlying geomythological dataset (KML files), proprietary WKT polygons, and "Heaven on Earth" artistic renderings are protected intellectual property. All rights to the data are reserved by A2A World LLC.
 
-Got questions? support@a2aworld.ai
+
+
+
+
+
+
 
 
