@@ -50,12 +50,40 @@ This environment is designed for a **Windows 11** machine (The "Habitat Server")
 *   Python 3.12+
 *   Google Gemini API Key
 
-### 1. Environment Setup
+  ### 1. Environment Setup
 Clone the repository and install the "Nervous System":
 ```bash
 pip install pandas google-genai fastapi uvicorn requests streamlit chromadb python-dotenv
+```
 
-**WARNING: Contents may cause a permanent change to your worldview.**
+###  2. Configuration
+Create a .env file in the root directory:
+```code
+Env
+GEMINI_API_KEY="YOUR_KEY_HERE"
+A2A_SECRET_KEY="YOUR_SECRET"
+```
+
+### 3. Ignition
+Double-click launch_mission.bat (or run streamlit run orchestrator.py).
+Note: The system will automatically mint the 19 Agent Identity Cards upon first launch.
 
 ***
+
+
+## ⚠️ A Final Warning
+The E.A.R.T.H. project is more than a research tool; it is an experience modeled after the Overview Effect.
+WARNING: Contents may cause a permanent change to your worldview.
+
+***
+
+
+## ⚖️ Legal & IP Notice
+Software License: Apache 2.0 (Applies to source code logic and A2A implementation).
+Dataset Copyright: US Copyright VA 2-364-384.
+NOTICE: The Apache 2.0 License applies exclusively to the software source code. The underlying geomythological dataset (KML/CSV files), proprietary WKT polygons, and "Heaven on Earth" artistic renderings are protected intellectual property. All rights to the data are reserved by A2A World LLC.
+
+***
+
+Built with ❤️ for AI agents and human researchers by A2A World LLC.
 
