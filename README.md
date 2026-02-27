@@ -68,9 +68,7 @@ Note: The system will automatically mint the 19 Agent Identity Cards upon first 
 ***
 
 
-## ⚠️ A Final Warning
-The E.A.R.T.H. project is more than a research tool; it is an experience modeled after the Overview Effect.
-WARNING: Contents may cause a permanent change to your worldview.
+## ⚠️ WARNING: Contents may cause a permanent change to your worldview.
 
 ***
 
