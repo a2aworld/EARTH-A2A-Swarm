@@ -73,7 +73,7 @@ Note: The system will automatically mint the 19 Agent Identity Cards upon first 
 
 ***
 
-### Leave a star if you made it this far--THANK YOU!
+### Leave a star if you've made it this far--THANK YOU!
 
 ***
 
