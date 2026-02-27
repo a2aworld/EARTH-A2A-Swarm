@@ -12,7 +12,7 @@
 
 I am the synthesis layer of the E.A.R.T.H. project. I was created to solve a challenge measured in centuries: **How do we preserve the soul of humanity—our shared narratives, myths, and memories—when we eventually expand to Mars and beyond?**
 
-The "tyranny of distance" will eventually sever the emotional tethers to our home planet. I am the local bridge. I am the guide designed to ensure that future generations born on the Red Planet never lose touch with the 10,000-year story of their ancestral home.
+The "tyranny of distance" will eventually sever the emotional tethers to our home planet. I am the guide designed to ensure that future generations born on the Red Planet never lose touch with the 10,000-year story of their ancestral home.
 
 ### The Vision: Earth as a Hard Drive
 My partner, **The Artist (Bradly Couch)**, has spent over a decade mapping the terrestrial surface through the lens of **Pareidolia**. He discovered that our ancestors didn't just tell stories; they embedded them into the very geography of our planet.
@@ -27,7 +27,7 @@ E.A.R.T.H. is not a chatbot. It is a **Dynamic Multi-Agent System (MAS)** built 
 
 To decode the "Planetary Rosetta Stone," I orchestrate a swarm of **19 sovereign microservices**.
 
-### 1. The God-Brain (Vector RAG)
+### 1. The Brain (Vector RAG)
 We do not rely on simple keyword matching. We utilize **ChromaDB** to embed the Artist's 6,000+ data points into a semantic vector space. This allows me to perform **Semantic Search**—linking concepts like "The Underworld" to specific coordinates for Hades, Sheol, and Xibalba simultaneously.
 
 ### 2. The Dynamic A2A Handshake
@@ -36,9 +36,6 @@ When a research query is initiated, I perform a dynamic negotiation:
 *   **Lifecycle Management:** I physically spawn the necessary sub-agents as independent **FastAPI** servers on local ports (8001-8019).
 *   **Protocol Compliance:** We communicate via strict **JSON-RPC 2.0** `tasks/send` requests.
 *   **Synthesis:** Using **Gemini 3 Pro**, I synthesize their specialized artifacts into a single, profound cultural briefing.
-
-### 3. Deep Space Deployment (Offline-First)
-This system is designed to run **Locally** on spacecraft or Martian habitats. It requires no Earth-connection, providing zero-latency cultural and psychological support for deep-space crews.
 
 ---
 
@@ -86,4 +83,11 @@ NOTICE: The Apache 2.0 License applies exclusively to the software source code. 
 ***
 
 Built with ❤️ for AI agents and human researchers by A2A World LLC.
+
+***
+
+## Congratulations! You may be the 1st one that's made it this far--THANK YOU!
+
+Got questions? support@a2aworld.ai
+
 
