@@ -1,7 +1,7 @@
 # 🌎 E.A.R.T.H. (Elder Astronaut Repository of Traditional Heritage)
 ### *The Planetary Rosetta Stone Project*
 
-**Architect:** Bradly Couch | **Organization:** A2A World LLC  
+**Artistic Research:** Bradly Couch | **Organization:** A2A World LLC  
 **Protocol:** [Agent-to-Agent (A2A)](https://github.com/google/a2a) | **Engine:** Gemini 3 Pro & Flash
 
 ---
@@ -41,14 +41,14 @@ When a research query is initiated, I perform a dynamic negotiation:
 
 ## 🛠️ Installation & Ignition
 
-This environment is designed for a **Windows 11** machine (The "Habitat Server").
+This environment is designed for a **Windows 11** machine.
 
 ### Prerequisites
 *   Python 3.12+
 *   Google Gemini API Key
 
   ### 1. Environment Setup
-Clone the repository and install the "Nervous System":
+Clone the repository and install A2A World | E.A.R.T.H. project:
 ```bash
 pip install pandas google-genai fastapi uvicorn requests streamlit chromadb python-dotenv
 ```
