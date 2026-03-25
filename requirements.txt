@@ -1,0 +1,17 @@
+pandas
+google-genai
+fastapi
+uvicorn
+requests
+streamlit
+chromadb
+python-dotenv
+pyjwt
+httpx
+geopandas
+shapely
+pyogrio
+fiona
+lxml
+numpy
+tqdm

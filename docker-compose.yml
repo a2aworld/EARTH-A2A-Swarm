@@ -1,0 +1,121 @@
+services:
+  orchestrator:
+    build: .
+    ports: ["8501:8501"]
+    env_file: .env
+    volumes: [".:/app"]
+    command: streamlit run orchestrator.py
+
+  agent-art-history:
+    build: .
+    ports: ["8001:8001"]
+    env_file: .env
+    command: python agent_service.py "Art History" 8001
+
+  agent-linguistics:
+    build: .
+    ports: ["8002:8002"]
+    env_file: .env
+    command: python agent_service.py "Linguistics" 8002
+
+  agent-archaeology:
+    build: .
+    ports: ["8003:8003"]
+    env_file: .env
+    command: python agent_service.py "Archaeology" 8003
+
+  agent-astrophysics:
+    build: .
+    ports: ["8004:8004"]
+    env_file: .env
+    command: python agent_service.py "Astrophysics" 8004
+
+  agent-geology:
+    build: .
+    ports: ["8005:8005"]
+    env_file: .env
+    command: python agent_service.py "Geology" 8005
+
+  agent-mythology:
+    build: .
+    ports: ["8006:8006"]
+    env_file: .env
+    command: python agent_service.py "Mythology" 8006
+
+  agent-astronomy:
+    build: .
+    ports: ["8007:8007"]
+    env_file: .env
+    command: python agent_service.py "Astronomy" 8007
+
+  agent-religious-studies:
+    build: .
+    ports: ["8008:8008"]
+    env_file: .env
+    command: python agent_service.py "Religious Studies" 8008
+
+  agent-environmental-studies:
+    build: .
+    ports: ["8009:8009"]
+    env_file: .env
+    command: python agent_service.py "Environmental Studies" 8009
+
+  agent-sociology:
+    build: .
+    ports: ["8010:8010"]
+    env_file: .env
+    command: python agent_service.py "Sociology" 8010
+
+  agent-folklore:
+    build: .
+    ports: ["8011:8011"]
+    env_file: .env
+    command: python agent_service.py "Folklore" 8011
+
+  agent-anthropology:
+    build: .
+    ports: ["8012:8012"]
+    env_file: .env
+    command: python agent_service.py "Anthropology" 8012
+
+  agent-geography:
+    build: .
+    ports: ["8013:8013"]
+    env_file: .env
+    command: python agent_service.py "Geography" 8013
+
+  agent-humanities:
+    build: .
+    ports: ["8014:8014"]
+    env_file: .env
+    command: python agent_service.py "Humanities" 8014
+
+  agent-cognitive-science:
+    build: .
+    ports: ["8015:8015"]
+    env_file: .env
+    command: python agent_service.py "Cognitive Science" 8015
+
+  agent-psychology:
+    build: .
+    ports: ["8016:8016"]
+    env_file: .env
+    command: python agent_service.py "Psychology" 8016
+
+  agent-classical-literature:
+    build: .
+    ports: ["8017:8017"]
+    env_file: .env
+    command: python agent_service.py "Classical Literature" 8017
+
+  agent-cultural-anthropology:
+    build: .
+    ports: ["8018:8018"]
+    env_file: .env
+    command: python agent_service.py "Cultural Anthropology" 8018
+
+  agent-art-critic:
+    build: .
+    ports: ["8019:8019"]
+    env_file: .env
+    command: python agent_service.py "Art Critic" 8019

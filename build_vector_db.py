@@ -2,9 +2,9 @@ import os
 import re
 import chromadb
 from tqdm import tqdm
+from config import KML_PATH, VECTOR_DB_DIR
 
-KML_PATH = "D:/A2A_WORLD/knowledge_base/Master.kml"
-DB_PATH = "D:/A2A_WORLD/vector_db"
+DB_PATH = str(VECTOR_DB_DIR)
 
 print("🌍 E.A.R.T.H. Vector Forge Initiated...")
 
