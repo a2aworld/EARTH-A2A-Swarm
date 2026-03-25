@@ -1,8 +1,8 @@
 import json
 import os
+from config import AGENT_CARDS_DIR
 
-base_dir = "D:/A2A_WORLD/agent_cards/"
-os.makedirs(base_dir, exist_ok=True)
+os.makedirs(AGENT_CARDS_DIR, exist_ok=True)
 
 agents =[
     ("Art History", 8001), ("Linguistics", 8002), ("Archaeology", 8003),
@@ -25,7 +25,7 @@ for name, port in agents:
         "capabilities": {"tasks-send": True, "artifact-generation": True},
         "skills":[{"id": f"{name.lower().replace(' ', '_')}-audit", "name": f"{name} Synthesis"}]
     }
-    with open(f"{base_dir}{name.replace(' ', '_')}_card.json", "w") as f:
+    with open(AGENT_CARDS_DIR / f"{name.replace(' ', '_')}_card.json", "w") as f:
         json.dump(card, f, indent=2)
 
 print("✅ SPRINT 1: 19 JSON-LD Compliant Agent Cards Minted.")
