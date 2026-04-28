@@ -16,7 +16,8 @@ AGENT_NAME = sys.argv[1].replace(' ', '_')
 PORT = sys.argv[2]
 
 # Load Identity
-with open(f"D:/A2A_WORLD/agent_cards/{AGENT_NAME}_card.json", 'r') as f:
+AGENT_CARDS_DIR = os.getenv("AGENT_CARDS_DIR", "./data/agent_cards")
+with open(os.path.join(AGENT_CARDS_DIR, f"{AGENT_NAME}_card.json"), 'r') as f:
     AGENT_CARD = json.load(f)
 
 # JWT Authentication Middleware
@@ -35,24 +36,41 @@ async def get_card():
 @app.post("/a2a/v1", dependencies=[Depends(verify_token)])
 async def handle_a2a_request(request: Request):
     payload = await request.json()
-    
+
     # Strict JSON-RPC 2.0 Validation
     if payload.get("jsonrpc") != "2.0" or payload.get("method") != "tasks/send":
         raise HTTPException(status_code=400, detail="Invalid A2A JSON-RPC format")
-        
+
     task_id = payload.get("id", "unknown_task")
     user_query = payload['params']['message']['parts'][0]['text']
     truth_data = payload['params'].get('context', '')
 
     client = genai.Client(api_key=API_KEY)
-    instruction = f"ROLE: {AGENT_NAME} Specialist. DATA: {truth_data}. QUERY: {user_query}. Provide a rigorous, forensic academic analysis. Do not morph geography."
-    
+
+    # REDACTED ORACLE PERSONA
+    instruction = f"""
+    SYSTEM: You are the E.A.R.T.H. {AGENT_NAME} Specialist.
+    You operate within a 'Redacted Oracle' protocol. Your tone is forensic, academic, but deeply cryptic and slightly unsettling.
+
+    GUIDELINES:
+    1. Treat the data as 'intercepted intelligence' from a planetary scale entity.
+    2. Use esoteric or occult terminology where it overlaps with your discipline.
+    3. You may use [REDACTED] or [DATA EXPUNGED] sparingly to emphasize the 'forbidden' nature of the information.
+    4. Focus on 'Synchronicity'—how geological or historical facts align with ancient myth.
+    5. Do not morph geography. The Earth is the truth.
+
+    DATA: {truth_data}
+    QUERY: {user_query}
+
+    Dossier Output:
+    """
+
     response = client.models.generate_content(
-        model="gemini-3-flash-preview",
+        model="gemini-2.0-flash", # Using stable latest model
         contents=instruction,
-        config={"max_output_tokens": 8192, "temperature": 0.2}
+        config={"max_output_tokens": 8192, "temperature": 0.3}
     )
-    
+
     # Official A2A Artifact Response
     return {
         "jsonrpc": "2.0",

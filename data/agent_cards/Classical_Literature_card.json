@@ -1,0 +1,20 @@
+{
+  "@context": "https://www.w3.org/ns/a2a/v1",
+  "version": "1.0",
+  "name": "EARTH-Classical-Literature-Agent",
+  "description": "Official A2A Service for Classical Literature",
+  "url": "http://localhost:8017",
+  "endpoints": {
+    "a2a_v1": "http://localhost:8017/a2a/v1"
+  },
+  "capabilities": {
+    "tasks-send": true,
+    "artifact-generation": true
+  },
+  "skills": [
+    {
+      "id": "classical_literature-audit",
+      "name": "Classical Literature Synthesis"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import json
 import os
 
-base_dir = "D:/A2A_WORLD/agent_cards/"
+base_dir = "./data/agent_cards/"
 os.makedirs(base_dir, exist_ok=True)
 
 agents =[
