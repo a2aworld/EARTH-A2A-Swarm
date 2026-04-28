@@ -1,4 +1,3 @@
-# D:\A2A_WORLD\agent_registry.py
 # The Master A2A Registry for the E.A.R.T.H. Swarm
 AGENT_REGISTRY = {
     "Art History": {"port": 8001},

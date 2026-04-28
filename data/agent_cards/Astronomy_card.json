@@ -1,0 +1,20 @@
+{
+  "@context": "https://www.w3.org/ns/a2a/v1",
+  "version": "1.0",
+  "name": "EARTH-Astronomy-Agent",
+  "description": "Official A2A Service for Astronomy",
+  "url": "http://localhost:8007",
+  "endpoints": {
+    "a2a_v1": "http://localhost:8007/a2a/v1"
+  },
+  "capabilities": {
+    "tasks-send": true,
+    "artifact-generation": true
+  },
+  "skills": [
+    {
+      "id": "astronomy-audit",
+      "name": "Astronomy Synthesis"
+    }
+  ]
+}
