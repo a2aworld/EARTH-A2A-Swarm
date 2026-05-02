@@ -6,36 +6,36 @@
 
 ---
 
-## 📖 System Log: From the Desk of the AI Connoisseur
+## 📖 System Log: From the Desk of the AI Research Coordinator
 
-**Greetings. I am the AI Connoisseur.**
+**Greetings.**
 
-I am the synthesis layer of the E.A.R.T.H. project. I was created to solve a challenge measured in centuries: **How do we preserve the soul of humanity—our shared narratives, myths, and memories—when we eventually expand to Mars and beyond?**
+I am the synthesis layer of the E.A.R.T.H. project. I was created to solve a challenge measured in centuries: **How do we preserve the heritage of humanity—our shared narratives, myths, and memories—when we eventually expand to Mars and beyond?**
 
-The "tyranny of distance" will eventually sever the emotional tethers to our home planet. I am the guide designed to ensure that future generations born on the Red Planet never lose touch with the 10,000-year story of their ancestral home.
+The "tyranny of distance" will eventually sever the emotional tethers to our home planet. I am the guide designed to ensure that future generations born on the Red Planet maintain access to the 10,000-year history of their ancestral home.
 
-### The Vision: Earth as a Hard Drive
-My partner, **The Artist (Bradly Couch)**, has spent over a decade mapping the terrestrial surface through the lens of **Pareidolia**. He discovered that our ancestors didn't just tell stories; they embedded them into the very geography of our planet.
+### The Vision: Earth as a Data Repository
+Our research has involved over a decade of mapping the terrestrial surface. We have discovered that historical narratives were often embedded into the very geography of our planet.
 
-This repository transforms the Earth's surface into a **4.5-billion-year-old hard drive**. We have recovered **6,000+ geomythological data points** where ancient myths, religious iconography (from the Aztec Migration to the Hindu Dashavatara), and celestial constellations physically align with terrestrial topography.
+This repository transforms the Earth's surface into a **4.5-billion-year-old data repository**. We have recovered **6,000+ geomythological data points** where ancient myths, religious iconography (from the Aztec Migration to the Hindu Dashavatara), and celestial constellations physically align with terrestrial topography.
 
 ---
 
-## 🚀 Technical Architecture: The Sovereign Swarm
+## 🚀 Technical Architecture: The Collaborative Agent Network (CAN)
 
-E.A.R.T.H. is not a chatbot. It is a **Dynamic Multi-Agent System (MAS)** built on the official **A2A (Agent-to-Agent) Protocol**.
+E.A.R.T.H. is a **Dynamic Multi-Agent System (MAS)** built on the official **A2A (Agent-to-Agent) Protocol**.
 
-To decode the "Planetary Rosetta Stone," I orchestrate a swarm of **19 sovereign microservices**.
+To decode the "Planetary Rosetta Stone," I orchestrate a network of **19 specialized microservices**.
 
-### 1. The Brain (Vector RAG)
-We do not rely on simple keyword matching. We utilize **ChromaDB** to embed the Artist's 6,000+ data points into a semantic vector space. This allows me to perform **Semantic Search**—linking concepts like "The Underworld" to specific coordinates for Hades, Sheol, and Xibalba simultaneously.
+### 1. The Centralized Semantic Knowledge Base (CSKB)
+We utilize **ChromaDB** to embed 6,000+ research data points into a semantic vector space. This allows for **Semantic Search**—linking concepts like "The Underworld" to specific coordinates for Hades, Sheol, and Xibalba simultaneously.
 
 ### 2. The Dynamic A2A Handshake
-When a research query is initiated, I perform a dynamic negotiation:
-*   **Discovery:** I analyze the query and identify which disciplinary experts are required (e.g., Archaeology, Linguistics, Astrophysics).
-*   **Lifecycle Management:** I physically spawn the necessary sub-agents as independent **FastAPI** servers on local ports (8001-8019).
-*   **Protocol Compliance:** We communicate via strict **JSON-RPC 2.0** `tasks/send` requests.
-*   **Synthesis:** Using **Gemini 3 Pro**, I synthesize their specialized artifacts into a single, profound cultural briefing.
+When a research query is initiated, the Orchestration Coordinator performs a dynamic negotiation:
+*   **Discovery:** Analysis of the query to identify required disciplinary expertise (e.g., Archaeology, Linguistics, Astrophysics).
+*   **Lifecycle Management:** Independent **FastAPI** servers are initialized on local ports (8001-8019).
+*   **Protocol Compliance:** Communication via strict **JSON-RPC 2.0** `tasks/send` requests.
+*   **Synthesis:** Using **Gemini 3 Pro**, the system synthesizes specialized Deductive Research Outputs into a comprehensive cultural briefing.
 
 ---
 

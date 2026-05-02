@@ -54,4 +54,4 @@ for i in tqdm(range(0, len(documents), batch_size), desc="Embedding Nodes"):
         ids=ids[i:i+batch_size]
     )
 
-print(f"\n✅ SUCCESS: {len(documents)} nodes permanently embedded into the God-Brain at {DB_PATH}")
+print(f"\n✅ SUCCESS: {len(documents)} nodes permanently embedded into the Centralized Semantic Knowledge Base at {DB_PATH}")
