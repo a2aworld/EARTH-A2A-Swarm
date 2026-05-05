@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 # ADK 2.0 Imports
 from google.adk import Agent
-from google.adk.tools import function_tool
+from google.adk.tools import FunctionTool
 from google.adk.runners import InMemoryRunner
 
 # Registry for Peer Discovery
@@ -41,10 +41,9 @@ def verify_token(credentials = Depends(security)):
 def generate_agent_token():
     return jwt.encode({"iss": "earth-agent", "sub": AGENT_NAME, "exp": time.time() + 300}, SECRET_KEY, algorithm="HS256")
 
-# --- ADK 2.0 Specialized Tools ---
+# --- ADK 2.0 Specialized Functions ---
 
-@function_tool
-def analyze_geospatial_data(context_data: str, research_query: str) -> str:
+async def analyze_geospatial_data(context_data: str, research_query: str) -> str:
     """
     Analyzes geospatial and geomythological data points to extract academic insights.
     """
@@ -58,7 +57,6 @@ def analyze_geospatial_data(context_data: str, research_query: str) -> str:
     )
     return response.text
 
-@function_tool
 async def consult_peer_specialist(specialty: str, query: str, context: str) -> str:
     """
     Consults a peer specialist in the mesh network for additional insights.
@@ -85,8 +83,11 @@ async def consult_peer_specialist(specialty: str, query: str, context: str) -> s
 # Define the ADK Agent
 adk_agent = Agent(
     name=AGENT_NAME,
-    instructions=f"You are a specialized {AGENT_NAME} researcher. Use consult_peer_specialist when you need interdisciplinary verification.",
-    tools=[analyze_geospatial_data, consult_peer_specialist]
+    instruction=f"You are a specialized {AGENT_NAME} researcher. Use consult_peer_specialist when you need interdisciplinary verification.",
+    tools=[
+        FunctionTool(analyze_geospatial_data),
+        FunctionTool(consult_peer_specialist)
+    ]
 )
 
 @app.get("/.well-known/agent-card.json")
@@ -115,7 +116,7 @@ async def handle_a2a_request(request: Request):
 
     # Fallback to direct tool call if runner output is empty in simulation
     if not final_analysis:
-        final_analysis = analyze_geospatial_data(context_data=truth_data, research_query=user_query)
+        final_analysis = await analyze_geospatial_data(context_data=truth_data, research_query=user_query)
 
     return {
         "jsonrpc": "2.0",
