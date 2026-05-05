@@ -25,7 +25,7 @@ PORT = sys.argv[2]
 
 # Load Identity
 try:
-    with open(f"D:/A2A_WORLD/agent_cards/{AGENT_NAME}_card.json", 'r') as f:
+    with open(f"./agent_cards/{AGENT_NAME}_card.json", 'r') as f:
         AGENT_CARD = json.load(f)
 except FileNotFoundError:
     AGENT_CARD = {"name": f"EARTH-{AGENT_NAME}-Agent"}

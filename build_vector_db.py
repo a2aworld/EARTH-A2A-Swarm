@@ -3,8 +3,8 @@ import re
 import chromadb
 from tqdm import tqdm
 
-KML_PATH = "D:/A2A_WORLD/knowledge_base/Master.kml"
-DB_PATH = "D:/A2A_WORLD/vector_db"
+KML_PATH = "./knowledge_base/Master.kml"
+DB_PATH = "./vector_db"
 
 print("🌍 E.A.R.T.H. Vector Forge Initiated...")
 

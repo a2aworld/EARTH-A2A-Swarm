@@ -2,7 +2,7 @@ import os
 import json
 
 class StellariumDataTransmuter:
-    def __init__(self, stellarium_user_dir="D:/Stellarium/user_data/"):
+    def __init__(self, stellarium_user_dir="./stellarium_user_data/"):
         self.stellarium_user_dir = stellarium_user_dir
         self.landscapes_dir = os.path.join(self.stellarium_user_dir, "landscapes")
         os.makedirs(self.landscapes_dir, exist_ok=True)

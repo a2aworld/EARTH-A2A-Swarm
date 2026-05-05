@@ -1,0 +1,20 @@
+{
+  "@context": "https://www.w3.org/ns/a2a/v1",
+  "version": "1.0",
+  "name": "EARTH-Archaeology-Agent",
+  "description": "Official A2A Service for Archaeology",
+  "url": "http://localhost:8003",
+  "endpoints": {
+    "a2a_v1": "http://localhost:8003/a2a/v1"
+  },
+  "capabilities": {
+    "tasks-send": true,
+    "artifact-generation": true
+  },
+  "skills": [
+    {
+      "id": "archaeology-audit",
+      "name": "Archaeology Synthesis"
+    }
+  ]
+}

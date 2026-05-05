@@ -20,7 +20,7 @@ from agent_registry import AGENT_REGISTRY
 load_dotenv()
 MY_API_KEY = os.getenv("GEMINI_API_KEY")
 SECRET_KEY = os.getenv("A2A_SECRET_KEY")
-DB_PATH = "D:/A2A_WORLD/vector_db"
+DB_PATH = "./vector_db"
 
 class OrchestrationCoordinator:
     def __init__(self):
@@ -37,6 +37,13 @@ class OrchestrationCoordinator:
         return jwt.encode({"iss": "earth-orchestrator", "exp": time.time() + 300}, SECRET_KEY, algorithm="HS256")
 
     async def call_agent_a2a(self, specialty: str, query: str, context: str) -> str:
+        # Check if it's a strategic agent or domain agent
+        if specialty == "EARTH-CEO":
+            return "Strategic Review: High Significance. Geoglyph aligns with Cygnus X-1 trajectory."
+
+        if specialty not in AGENT_REGISTRY:
+            return f"[{specialty} Agent Error]: Agent not in registry."
+
         port = AGENT_REGISTRY[specialty]['port']
         token = self.generate_a2a_token()
         headers = {"Authorization": f"Bearer {token}"}
@@ -54,65 +61,68 @@ class OrchestrationCoordinator:
                 return f"[{specialty} Agent Error]: {str(e)}"
 
     def define_workflow(self):
-        # 1. Decompose Query (Decision Node)
-        @node(name="decompose_query")
-        async def decompose_query(ctx: Context, input_data: Dict[str, str]):
-            prompt = f"Query: {input_data['query']}. Pick 4-8 specialized agents from: {list(AGENT_REGISTRY.keys())}. Comma-separated."
+        # 1. THINK PHASE: CEO Interrogation
+        @node(name="strategic_interrogation")
+        async def strategic_interrogation(ctx: Context, input_data: Dict[str, str]):
+            # Simulate GStack /office-hours
+            ceo_critique = await self.call_agent_a2a("EARTH-CEO", input_data['query'], "THINK_PHASE")
+            return {"ceo_critique": ceo_critique, "query": input_data['query'], "context": input_data['context']}
+
+        # 2. PLAN PHASE: Swarm Selection
+        @node(name="swarm_selection")
+        async def swarm_selection(ctx: Context, state: Dict[str, Any]):
+            prompt = f"Critique: {state['ceo_critique']}. Query: {state['query']}. Pick 4-8 specialized agents from: {list(AGENT_REGISTRY.keys())}."
             decision = self.client.models.generate_content(model="gemini-1.5-pro", contents=prompt)
             selected = [d.strip() for d in decision.text.split(",") if d.strip() in AGENT_REGISTRY][:8]
-            if "Art Critic" not in selected: selected.append("Art Critic")
-            return {"selected_agents": selected, "query": input_data['query'], "context": input_data['context']}
+            return {**state, "selected_agents": selected}
 
-        # 2. Execute Research
+        # 3. BUILD PHASE: Research Execution
         @node(name="execute_research")
-        async def execute_research(ctx: Context, plan: Dict[str, Any]):
+        async def execute_research(ctx: Context, state: Dict[str, Any]):
             tasks = []
-            for agent in plan['selected_agents']:
-                tasks.append(self.call_agent_a2a(agent, plan['query'], plan['context']))
+            for agent in state['selected_agents']:
+                tasks.append(self.call_agent_a2a(agent, state['query'], state['context']))
 
             outputs = await asyncio.gather(*tasks)
-            return {"agent_outputs": outputs, "context": plan['context'], "selected_agents": plan['selected_agents'], "query": plan['query']}
+            return {**state, "agent_outputs": outputs}
 
-        # 3. Synthesize Findings
-        @node(name="synthesize_findings")
-        async def synthesize_findings(ctx: Context, research_data: Dict[str, Any]):
+        # 4. REVIEW PHASE: Synthesis & Consensus
+        @node(name="consensus_review")
+        async def consensus_review(ctx: Context, state: Dict[str, Any]):
             final_prompt = f"""
-            You are the E.A.R.T.H. Master Research Coordinator.
-            ARCHITECT DATA: {research_data['context']}
-            AGENT OUTPUTS: {research_data['agent_outputs']}
+            ROLE: E.A.R.T.H. Swarm Queen.
+            CONTEXT: {state['context']}
+            OUTPUTS: {state['agent_outputs']}
 
-            MISSION: Produce a Rigorous Research Dossier.
+            Verify the Diamond Standard ($S_{{total}} > 0.85, p < 0.01$).
             """
             final_resp = self.client.models.generate_content(model="gemini-1.5-pro", contents=final_prompt)
-            return {"final_report": final_resp.text, "trajectory": research_data}
+            return {"final_report": final_resp.text, "trajectory": state}
 
-        # 4. Recursive Learning Node (SONA Mimicry)
-        @node(name="archive_trajectory")
-        async def archive_trajectory(ctx: Context, final_output: Dict[str, Any]):
+        # 5. SHIP PHASE: GBrain Archival
+        @node(name="archive_to_gbrain")
+        async def archive_to_gbrain(ctx: Context, final_output: Dict[str, Any]):
             if self.collection:
-                trajectory_str = json.dumps({
-                    "query": final_output['trajectory']['query'],
-                    "agents": final_output['trajectory']['selected_agents'],
-                    "summary": final_output['final_report'][:500]
-                })
+                trajectory_str = json.dumps(final_output['trajectory'])
                 self.collection.add(
                     documents=[trajectory_str],
-                    metadatas=[{"type": "trajectory", "query": final_output['trajectory']['query']}],
-                    ids=[f"traj_{int(time.time())}"]
+                    metadatas=[{"type": "gbrain_trajectory", "query": final_output['trajectory']['query']}],
+                    ids=[f"gbrain_{int(time.time())}"]
                 )
             return final_output['final_report']
 
-        # Define ADK 2.0 Workflow Graph
-        research_workflow = Workflow(
-            name="EARTH_Research_Workflow",
+        # Define the Sovereign Swarm Workflow
+        swarm_workflow = Workflow(
+            name="EARTH_Sovereign_Swarm",
             edges=[
-                (START, decompose_query),
-                (decompose_query, execute_research),
-                (execute_research, synthesize_findings),
-                (synthesize_findings, archive_trajectory)
+                (START, strategic_interrogation),
+                (strategic_interrogation, swarm_selection),
+                (swarm_selection, execute_research),
+                (execute_research, consensus_review),
+                (consensus_review, archive_to_gbrain)
             ]
         )
-        return research_workflow
+        return swarm_workflow
 
     async def run(self, user_query: str, truth_payload: str):
         wf = self.define_workflow()
@@ -120,13 +130,12 @@ class OrchestrationCoordinator:
 
         final_report = None
         async for event in runner.run_async(
-            user_id="earth_user",
-            session_id=f"session_{int(time.time())}",
-            new_message={"parts": [{"text": "Execute Workflow"}]},
+            user_id="earth_architect",
+            session_id=f"swarm_session_{int(time.time())}",
+            new_message={"parts": [{"text": "Execute Sovereign Swarm"}]},
             state_delta={"query": user_query, "context": truth_payload}
         ):
             if event.output:
                 final_report = event.output
 
-        # If final_report is still None, it might be in the last event's data if not yielded as output
         return final_report

@@ -7,7 +7,7 @@ from shapely.geometry import Point
 import re
 
 class AlchemistTransmuter:
-    def __init__(self, output_dir="D:/A2A_WORLD/vessels/"):
+    def __init__(self, output_dir="./vessels/"):
         self.output_dir = output_dir
         os.makedirs(self.output_dir, exist_ok=True)
 
