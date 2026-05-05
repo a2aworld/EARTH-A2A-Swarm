@@ -93,15 +93,25 @@ if prompt := st.chat_input("Initiate Sovereign Swarm Command..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"): st.markdown(prompt)
 
-    if prompt.startswith("/"):
-        parts = prompt.split(" ", 1)
-        cmd = parts[0]
-        args = parts[1] if len(parts) > 1 else ""
-        response = asyncio.run(handle_slash_command(cmd, args))
-    else:
-        # Default to standard orchestration if not a command
-        coordinator = OrchestrationCoordinator()
-        response = asyncio.run(coordinator.run(prompt, ""))
+    try:
+        if not MY_API_KEY:
+            raise ValueError("SYSTEM ERROR: GEMINI_API_KEY IS NULL. ACCESS DENIED.")
+
+        if prompt.startswith("/"):
+            parts = prompt.split(" ", 1)
+            cmd = parts[0]
+            args = parts[1] if len(parts) > 1 else ""
+            # Basic Sanitization
+            args = args.replace(";", "").replace("--", "")
+            response = asyncio.run(handle_slash_command(cmd, args))
+        else:
+            # Default to standard orchestration if not a command
+            with st.spinner("INITIATING SWARM COHESION..."):
+                coordinator = OrchestrationCoordinator()
+                response = asyncio.run(coordinator.run(prompt, ""))
+    except Exception as e:
+        response = f"⚠️ CRITICAL SYSTEM FAILURE: {str(e)}"
+        st.error(response)
 
     with st.chat_message("assistant"):
         st.markdown(f'<div class="status-intercepted">{response}</div>', unsafe_allow_html=True)

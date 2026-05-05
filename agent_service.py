@@ -106,13 +106,16 @@ async def handle_a2a_request(request: Request):
     # Use ADK Runner to execute agent
     runner = InMemoryRunner(agent=adk_agent)
     final_analysis = ""
-    async for event in runner.run_async(
-        user_id="earth_system",
-        session_id=f"agent_session_{int(time.time())}",
-        new_message={"parts": [{"text": f"Analyze this: {user_query}. Context: {truth_data}"}]}
-    ):
-        if event.output:
-            final_analysis = event.output
+    try:
+        async for event in runner.run_async(
+            user_id="earth_system",
+            session_id=f"agent_session_{int(time.time())}",
+            new_message={"parts": [{"text": f"Analyze this: {user_query}. Context: {truth_data}"}]}
+        ):
+            if event.output:
+                final_analysis = event.output
+    except Exception as e:
+        print(f"ADK Runner Error: {str(e)}")
 
     # Fallback to direct tool call if runner output is empty in simulation
     if not final_analysis:

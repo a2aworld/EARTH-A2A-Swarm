@@ -5,6 +5,7 @@ import time
 import jwt
 import os
 import chromadb
+import subprocess
 from typing import List, Dict, Any
 from google import genai
 from dotenv import load_dotenv
@@ -24,8 +25,16 @@ DB_PATH = "./vector_db"
 
 class OrchestrationCoordinator:
     def __init__(self):
-        self.client = genai.Client(api_key=MY_API_KEY)
+        self._client = None
         self.collection = self.load_vector_db()
+
+    @property
+    def client(self):
+        if self._client is None:
+            if not MY_API_KEY:
+                raise ValueError("GEMINI_API_KEY is missing. Swarm cognition disabled.")
+            self._client = genai.Client(api_key=MY_API_KEY)
+        return self._client
 
     def load_vector_db(self):
         if os.path.exists(DB_PATH):
@@ -34,7 +43,12 @@ class OrchestrationCoordinator:
         return None
 
     def generate_a2a_token(self):
-        return jwt.encode({"iss": "earth-orchestrator", "exp": time.time() + 300}, SECRET_KEY, algorithm="HS256")
+        return jwt.encode({"iss": "earth-orchestrator", "exp": time.time() + 300}, SECRET_KEY or "FALLBACK", algorithm="HS256")
+
+    def _is_online(self, port):
+        import socket
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            return s.connect_ex(('localhost', port)) == 0
 
     async def call_agent_a2a(self, specialty: str, query: str, context: str) -> str:
         # Check if it's a strategic agent or domain agent
@@ -44,7 +58,18 @@ class OrchestrationCoordinator:
         if specialty not in AGENT_REGISTRY:
             return f"[{specialty} Agent Error]: Agent not in registry."
 
+        # Self-Healing: Attempt to boot agent if offline
         port = AGENT_REGISTRY[specialty]['port']
+        if not self._is_online(port):
+            try:
+                subprocess.Popen([os.sys.executable, "agent_service.py", specialty, str(port)])
+                # Wait for boot
+                for _ in range(10):
+                    if self._is_online(port): break
+                    await asyncio.sleep(1)
+            except:
+                return f"[{specialty} Agent Error]: FAILED TO BOOT MICROSERVICE"
+
         token = self.generate_a2a_token()
         headers = {"Authorization": f"Bearer {token}"}
 
