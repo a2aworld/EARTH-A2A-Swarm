@@ -1,5 +1,0 @@
-/home/jules/.pyenv/versions/3.12.13/lib/python3.12/site-packages/authlib/_joserfc_helpers.py:8: AuthlibDeprecationWarning: authlib.jose module is deprecated, please use joserfc instead.
-It will be compatible before version 2.0.0.
-  from authlib.jose import ECKey
-/home/jules/.pyenv/versions/3.12.13/lib/python3.12/site-packages/google/adk/features/_feature_decorator.py:72: UserWarning: [EXPERIMENTAL] feature FeatureName.PLUGGABLE_AUTH is enabled.
-  check_feature_enabled()

@@ -117,7 +117,7 @@ async def orchestrate(user_query):
     coordinator = OrchestrationCoordinator()
 
     client = genai.Client(api_key=MY_API_KEY)
-    discovery = client.models.generate_content(model="gemini-3-pro-preview", contents=f"Pick 4-8 agents for: {user_query} from {list(AGENT_REGISTRY.keys())}")
+    discovery = client.models.generate_content(model="gemini-1.5-pro", contents=f"Pick 4-8 agents for: {user_query} from {list(AGENT_REGISTRY.keys())}")
     selected = [d.strip() for d in discovery.text.split(",") if d.strip() in AGENT_REGISTRY]
 
     # Progress visualization

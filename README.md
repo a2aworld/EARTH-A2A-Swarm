@@ -37,6 +37,20 @@ When a research query is initiated, the Orchestration Coordinator performs a dyn
 *   **Protocol Compliance:** Communication via strict **JSON-RPC 2.0** `tasks/send` requests.
 *   **Synthesis:** Using **Gemini 3 Pro**, the system synthesizes specialized Deductive Research Outputs into a comprehensive cultural briefing.
 
+### 3. Astral Resonance Integration (Stellarium Bridge)
+A2A World now features a direct bi-directional bridge to the **Stellarium Pro Planetarium**.
+*   **Temporal Precession:** The `AstroAnalystAgent` can autonomously rewind time to find mythic epochs.
+*   **Live Synchronization:** One-click synchronization of terrestrial POV to celestial observation.
+*   **Embedded View:** Integrated Aladin Lite viewer for immediate dashboard reference.
+
+---
+
+## 🛰️ Pro Planetarium Setup
+To enable 'Astral Gaze' features:
+1.  Download and install [Stellarium Desktop](https://stellarium.org/).
+2.  Enable the **RemoteControl Plugin** (Configuration -> Plugins).
+3.  Set the server port to **8090**.
+
 ---
 
 ## 🛠️ Installation & Ignition
