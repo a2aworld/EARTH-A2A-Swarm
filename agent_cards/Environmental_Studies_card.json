@@ -1,0 +1,20 @@
+{
+  "@context": "https://www.w3.org/ns/a2a/v1",
+  "version": "1.0",
+  "name": "EARTH-Environmental-Studies-Agent",
+  "description": "Official A2A Service for Environmental Studies",
+  "url": "http://localhost:8009",
+  "endpoints": {
+    "a2a_v1": "http://localhost:8009/a2a/v1"
+  },
+  "capabilities": {
+    "tasks-send": true,
+    "artifact-generation": true
+  },
+  "skills": [
+    {
+      "id": "environmental_studies-audit",
+      "name": "Environmental Studies Synthesis"
+    }
+  ]
+}

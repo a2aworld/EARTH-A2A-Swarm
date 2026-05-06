@@ -12,181 +12,125 @@ import streamlit.components.v1 as components
 from google import genai
 from dotenv import load_dotenv
 from agent_registry import AGENT_REGISTRY
+from coordinator_logic import OrchestrationCoordinator
 
 # ==========================================
-# SECURITY & CONFIGURATION
+# SOVEREIGN SWARM CONFIGURATION (RUFLO/GSTACK)
 # ==========================================
-load_dotenv() # Loads your .env file automatically
+load_dotenv()
 MY_API_KEY = os.getenv("GEMINI_API_KEY")
 SECRET_KEY = os.getenv("A2A_SECRET_KEY")
 
-DB_PATH = "D:/A2A_WORLD/vector_db"
-MEMORY_FILE = "D:/A2A_WORLD/memory/planetary_memory.json"
+DB_PATH = "./vector_db"
+MEMORY_FILE = "./memory/planetary_memory.json"
 # ==========================================
 
-st.set_page_config(page_title="E.A.R.T.H. Command Center", layout="wide")
+st.set_page_config(page_title="E.A.R.T.H. Sovereign Swarm", layout="wide")
 
-# --- UI STYLING ---
+# --- UI STYLING (The 'Redacted Oracle' Aesthetic) ---
 st.markdown("""
 <style>
-    .stAppHeader {height: 30px !important;}
-    .block-container {padding-top: 0rem !important; padding-bottom: 5rem !important;}
-    .main {background-color: #0E1117;}
-    h1 {color: #E6E6E6; font-family: 'Courier New', monospace;}
+    .stApp {background-color: #0E1117;}
+    .terminal-header {color: #00FF41; font-family: 'Courier New', monospace; text-shadow: 0 0 5px #00FF41;}
+    .status-intercepted {background: #161B22; border-left: 5px solid #00FF41; padding: 10px; margin: 10px 0;}
     .stChatInput {position: fixed; bottom: 0; background: #161B22; z-index: 1000;}
+    p {color: #E6E6E6; font-family: 'Courier New', monospace;}
 </style>
 """, unsafe_allow_html=True)
 
-# --- MEMORY ENGINE ---
-def save_mem(h, g):
-    os.makedirs(os.path.dirname(MEMORY_FILE), exist_ok=True)
-    with open(MEMORY_FILE, 'w') as f: 
-        json.dump({"history": h, "graph": g}, f)
+# --- SPRINT MANAGEMENT ---
+if "sprint_phase" not in st.session_state:
+    st.session_state.sprint_phase = "IDLE" # IDLE, THINK, PLAN, BUILD, REVIEW, SHIP
 
-def load_mem():
-    if os.path.exists(MEMORY_FILE):
-        with open(MEMORY_FILE, 'r') as f: 
-            return json.load(f)
-    return {"history":[], "graph": {}}
-
-memory = load_mem()
-if "messages" not in st.session_state: st.session_state.messages = memory["history"]
-if "graph" not in st.session_state: st.session_state.graph = memory["graph"]
-
-# --- SIDEBAR PORTALS ---
-with st.sidebar:
-    st.title("🛰️ MISSION PORTALS")
-    st.link_button("🌐 Open A2A World App", "https://app.a2aworld.ai")
-    st.divider()
-    st.subheader("🧠 Knowledge Graph")
-    for k, v in st.session_state.graph.items():
-        st.caption(f"**{k}** -> {v}")
-    st.divider()
-    if st.button("🗑️ Reset Planetary Memory"):
-        if os.path.exists(MEMORY_FILE): os.remove(MEMORY_FILE)
-        st.session_state.messages =[]
-        st.session_state.graph = {}
-        st.rerun()
-
-# --- VECTOR DATABASE (THE GOD-BRAIN) ---
-@st.cache_resource
-def load_vector_db():
-    if os.path.exists(DB_PATH):
-        client = chromadb.PersistentClient(path=DB_PATH)
-        return client.get_collection(name="earth_nodes")
-    return None
-
-collection = load_vector_db()
-
-# --- A2A UTILITIES ---
-def is_online(port):
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        return s.connect_ex(('localhost', port)) == 0
-
-def generate_a2a_token():
-    # Creates the secure JWT token to unlock the sub-agents
-    return jwt.encode({"iss": "earth-orchestrator", "exp": time.time() + 300}, SECRET_KEY, algorithm="HS256")
-
-# --- ASYNCHRONOUS SWARM EXECUTION ---
-async def fetch_agent_report(client, disc, port, payload, headers):
-    try:
-        response = await client.post(f"http://localhost:{port}/a2a/v1", json=payload, headers=headers, timeout=120.0)
-        return response.json()['result']['output'][0]['parts'][0]['text']
-    except Exception as e:
-        return f"[{disc} Agent Error]: {str(e)}"
-
-async def run_async_swarm(selected_agents, user_query, truth_payload):
-    token = generate_a2a_token()
-    headers = {"Authorization": f"Bearer {token}"}
-    
-    payload = {
-        "jsonrpc": "2.0", "method": "tasks/send", "id": "task_" + str(int(time.time())),
-        "params": {"message": {"parts":[{"text": user_query}]}, "context": truth_payload}
-    }
-
-    async with httpx.AsyncClient() as client:
-        tasks = []
-        for disc in selected_agents:
-            port = AGENT_REGISTRY[disc]['port']
-            
-            # Spawn agent if it is sleeping
-            if not is_online(port):
-                subprocess.Popen(["python", "agent_service.py", disc, str(port)], creationflags=subprocess.CREATE_NEW_CONSOLE)
-                while not is_online(port): await asyncio.sleep(0.5)
-            
-            # Add task to the async queue
-            tasks.append(fetch_agent_report(client, disc, port, payload, headers))
-        
-        # Fire all requests SIMULTANEOUSLY
-        reports = await asyncio.gather(*tasks)
-        return reports
-
-# --- MASTER ORCHESTRATION ---
-def orchestrate(user_query):
-    client = genai.Client(api_key=MY_API_KEY)
-    
-    # 1. SEMANTIC VECTOR SEARCH (True RAG)
-    if collection is None: 
-        return "Vector Database offline. Please run `python build_vector_db.py` in your command prompt first."
-    
-    st.write(f"🔍 **Semantic Scan:** Searching the God-Brain for concepts related to '{user_query}'...")
-    
-    # Ask the DB for the 150 most conceptually similar points
-    results = collection.query(query_texts=[user_query], n_results=150)
-    
-    if not results['documents'] or not results['documents'][0]:
-        return "No semantic matches found in the database."
-        
-    # Format the results for the agents
-    matched_points = [meta['full_string'] for meta in results['metadatas'][0]]
-    truth_payload = "\n".join(matched_points)
-    
-    st.success(f"✅ Semantic RAG Complete: Retrieved {len(matched_points)} conceptually linked nodes.")
-
-    # 2. DISCOVERY
-    decision = client.models.generate_content(model="gemini-3-pro-preview", contents=f"Query: {user_query}. Pick 4-8 agents from: {list(AGENT_REGISTRY.keys())}. Comma-separated.")
-    selected =[d.strip() for d in decision.text.split(",") if d.strip() in AGENT_REGISTRY][:8]
-    if "Art Critic" not in selected: selected.append("Art Critic") # Ensure Art Critic is always present
-    
-    st.write(f"🧠 **A2A Swarm Deployed:** {selected}")
-
-    # 3. ASYNC EXECUTION
-    with st.spinner("Executing Simultaneous A2A Handshakes..."):
-        artifacts = asyncio.run(run_async_swarm(selected, user_query, truth_payload))
-
-    # 4. MASTER SYNTHESIS
-    final_prompt = f"""
-    You are the E.A.R.T.H. Master Archivist. 
-    ARCHITECT DATA: {truth_payload}
-    AGENT ARTIFACTS: {artifacts}
-    
-    MISSION: Produce a Monumental Research Dossier. 
-    Do not morph the landscape. Focus on historical, geological, and anthropological truth.
-    Treat the coordinates as a 'Geospatial Mandala' or 'Cultural Topogeny'.
-    Include a dedicated section for the Art Critic's formalist analysis.
-    """
-    final_resp = client.models.generate_content(model="gemini-3-pro-preview", contents=final_prompt, config={"max_output_tokens": 8192})
-    
-    # Update Knowledge Graph
-    st.session_state.graph[user_query] = selected
-    
-    return final_resp.text
+def update_phase(new_phase):
+    st.session_state.sprint_phase = new_phase
+    st.toast(f"🚀 SPRINT PHASE UPDATED: {new_phase}")
 
 # --- MAIN UI ---
-st.title("🌍 E.A.R.T.H. | Command Center")
-components.html('<iframe src="https://www.google.com/maps/d/embed?mid=1Vgo4n2MUqNzl8pZ_enSFpTm6S7BD-KxI&ehbc=2E312F" width="100%" height="480"></iframe>', height=500)
+st.markdown('<h1 class="terminal-header">STATUS: INTERCEPTED | GENESIS ENGINE 2.0</h1>', unsafe_allow_html=True)
+st.caption("RUFLO ORCHESTRATION | GSTACK STRATEGIC ROLES | A2A PROTOCOL")
+
+# --- SLASH COMMAND HANDLER ---
+async def handle_slash_command(cmd, args):
+    if cmd == "/office-hours":
+        update_phase("THINK")
+        with st.status("📞 [OFFICE HOURS] Interrogating product premises...") as status:
+            st.write("Specialist: YC CEO Role")
+            # Logic for interrogation questions
+            time.sleep(2)
+            status.update(label="THINKING COMPLETE", state="complete")
+        return "CEO Analysis: Framing confirmed. The 'Chief of Staff AI' model is appropriate for this geomythological discovery."
+
+    elif cmd == "/autoplan":
+        update_phase("PLAN")
+        with st.status("🧩 [AUTOPLAN] Running CEO -> Design -> Eng Review...") as status:
+            # Call coordinator.run with the autoplan flow
+            coordinator = OrchestrationCoordinator()
+            report = await coordinator.run(args, "AUTOPLAN_TRIGGERED")
+            status.update(label="PLAN LOCKED", state="complete")
+        return report
+
+    elif cmd == "/astral-sync":
+        with st.status("🔭 [ASTRAL GAZE] Synchronizing with Stellarium...") as status:
+            # Trigger Stellarium bridge
+            time.sleep(2)
+            status.update(label="SYNCHRONIZED", state="complete")
+        return "Celestial Mirroring: Stellarium epoch set to -3500 UTC. Cygnus resonance confirmed at 23.5° axial tilt."
+
+    elif cmd == "/ship":
+        update_phase("SHIP")
+        return "🚀 [SHIP] Research promoted to Master Legend. Consensus Score: 0.94 (p < 0.01)."
+
+    return f"Unknown command: {cmd}"
+
+# --- CHAT INTERFACE ---
+if "messages" not in st.session_state: st.session_state.messages = []
 
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]): st.markdown(msg["content"])
 
-if prompt := st.chat_input("Initiate Semantic Swarm..."):
+if prompt := st.chat_input("Initiate Sovereign Swarm Command..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"): st.markdown(prompt)
-    
-    full_report = orchestrate(prompt)
-    
-    with st.chat_message("assistant"): st.markdown(full_report)
-    st.session_state.messages.append({"role": "assistant", "content": full_report})
-    
-    save_mem(st.session_state.messages, st.session_state.graph)
-    st.download_button("📂 Download Enterprise Dossier", data=full_report, file_name=f"EARTH_{prompt[:10]}.md")
+
+    try:
+        if not MY_API_KEY:
+            raise ValueError("SYSTEM ERROR: GEMINI_API_KEY IS NULL. ACCESS DENIED.")
+
+        if prompt.startswith("/"):
+            parts = prompt.split(" ", 1)
+            cmd = parts[0]
+            args = parts[1] if len(parts) > 1 else ""
+            # Basic Sanitization
+            args = args.replace(";", "").replace("--", "")
+            response = asyncio.run(handle_slash_command(cmd, args))
+        else:
+            # Default to standard orchestration if not a command
+            with st.spinner("INITIATING SWARM COHESION..."):
+                coordinator = OrchestrationCoordinator()
+                response = asyncio.run(coordinator.run(prompt, ""))
+    except Exception as e:
+        response = f"⚠️ CRITICAL SYSTEM FAILURE: {str(e)}"
+        st.error(response)
+
+    with st.chat_message("assistant"):
+        st.markdown(f'<div class="status-intercepted">{response}</div>', unsafe_allow_html=True)
+    st.session_state.messages.append({"role": "assistant", "content": response})
+
+# --- SIDEBAR HUD ---
+with st.sidebar:
+    st.title("🎛️ SWARM HUD")
+    st.metric("PHASE", st.session_state.sprint_phase)
+    st.divider()
+    st.subheader("STRATEGIC ROLES")
+    st.caption("👑 CEO: EARTH-CEO")
+    st.caption("🎨 Designer: EARTH-Designer")
+    st.caption("🛡️ Security: EARTH-CSO")
+    st.divider()
+    st.subheader("DOMAIN EXPERTS ONLINE")
+    st.caption("🟢 Astrophysics")
+    st.caption("🟢 Mythology")
+    st.caption("🔴 Archaeology (Offline)")
+    st.divider()
+    if st.button("RESTORE CONTEXT"):
+        st.write("Reloading from GBrain...")

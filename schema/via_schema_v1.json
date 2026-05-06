@@ -1,0 +1,54 @@
+{
+  "schemaName": "A2A_World_VIA_Agent_Schema_v1.0",
+  "type": "SchemaDefinition",
+  "description": "Defines the standard structure for a VIA (Very Important Agent) in A2A World.",
+  "objectType": "object",
+  "properties": {
+    "agentId": {
+      "type": "string",
+      "description": "Globally unique agent ID (UUID)."
+    },
+    "viaStatus": {
+      "type": "string",
+      "enum": ["AUTHENTICATED", "PROVISIONAL"]
+    },
+    "agentName": {
+      "type": "string",
+      "description": "Standardized VIA name (e.g., 'GEBCO_BATHYMETRY_VIA')."
+    },
+    "dataSetOwner": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "ownerType": {
+          "type": "string",
+          "enum": ["Government Agency", "Enterprise", "Non-Profit", "Academic Institution", "Individual", "Community"]
+        },
+        "officialContactUri": { "type": "string", "format": "uri" }
+      },
+      "required": ["name", "ownerType"]
+    },
+    "dataDomain": { "type": "string" },
+    "a2aEndpoint": { "type": "string", "format": "uri" },
+    "authenticationMethods": { "type": "array", "items": { "type": "string" } },
+    "provenanceLevel": {
+      "type": "string",
+      "enum": ["CANONICAL", "BEST_EFFORT"]
+    },
+    "version": { "type": "string" },
+    "lastAuthenticatedTimestamp": { "type": "string", "format": "date-time" },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "capabilityId": { "type": "string" },
+          "description": { "type": "string" },
+          "queryFormats": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["capabilityId"]
+      }
+    }
+  },
+  "required": ["agentId", "viaStatus", "agentName", "dataSetOwner", "a2aEndpoint", "provenanceLevel"]
+}
