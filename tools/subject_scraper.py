@@ -59,7 +59,7 @@ class SubjectScraper:
             else:
                 figure_name, part_name = name, "Main"
 
-            figure_id = kebab_case(figure_name)[:100] # Limit ID length
+            figure_id = kebab_case(figure_name)[:50] # Hard limit for path length
             coords_text = pm.xpath(".//kml:coordinates/text()", namespaces=ns)
             if not coords_text: continue
 

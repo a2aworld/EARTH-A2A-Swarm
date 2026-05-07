@@ -56,13 +56,31 @@ def wrap_geometry_coords(geom):
     return geom
 
 def normalize_geometry(geom):
-    """Full Diamond Standard Normalization."""
+    """Full Diamond Standard Normalization with Aggressive Validation."""
+    if geom is None or geom.is_empty:
+        return geom
+
+    # Preliminary repair
     if not geom.is_valid:
         geom = geom.buffer(0)
 
-    geom = split_at_antimeridian(geom)
+    # 1. Split at antimeridian
+    try:
+        geom = split_at_antimeridian(geom)
+    except Exception as e:
+        print(f"Antimeridian Split Error: {e}")
+        # Fallback to simple wrap repair
+        geom = wrap_geometry_coords(geom)
 
+    # 2. Final validity check & stabilization
     if not geom.is_valid:
         geom = geom.buffer(0)
+
+    # Ensure it's not a GeometryCollection which breaks some viewers
+    if geom.geom_type == 'GeometryCollection':
+        # Keep only Polygons/MultiPolygons
+        from shapely.geometry import MultiPolygon, Polygon
+        parts = [g for g in geom.geoms if isinstance(g, (Polygon, MultiPolygon))]
+        geom = unary_union(parts) if parts else geom
 
     return geom
