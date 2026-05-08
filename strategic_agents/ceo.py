@@ -11,6 +11,8 @@ class CEOAgent:
         GStack-style Strategic Review of a research mission.
         """
         # Logic to challenge scope and align with 10-star product vision
+        if "MILESTONE 2" in plan_details:
+            return f"CEO Strategic Review: Milestone 2 Scaling Detected. Validating Diamond Standard consensus for {plan_details}. ENSURE p-value < 0.01."
         return f"Strategic Review: {plan_details} - CHALLENGE: Is this geoglyph significant enough for the master ledger?"
 
     def get_agent(self):

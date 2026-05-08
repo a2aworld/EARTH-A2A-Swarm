@@ -7,6 +7,7 @@ import json
 import jwt
 import asyncio
 import httpx
+import string
 import chromadb
 import streamlit.components.v1 as components
 from google import genai
@@ -48,7 +49,21 @@ def update_phase(new_phase):
 
 # --- MAIN UI ---
 st.markdown('<h1 class="terminal-header">STATUS: INTERCEPTED | GENESIS ENGINE 2.0</h1>', unsafe_allow_html=True)
-st.caption("RUFLO ORCHESTRATION | GSTACK STRATEGIC ROLES | A2A PROTOCOL")
+st.caption("INDESTRUCTIBLE SOVEREIGN | RUFLO ORCHESTRATION | GSTACK STRATEGIC ROLES")
+
+# --- AUTO-HEALING & BOOTSTRAP ---
+def check_system_integrity():
+    if not os.path.exists("./data/legend_index.json"):
+        st.warning("⚠️ MASTER LEGEND CORRUPTED OR MISSING. TRIGGERING SUBJECT SCRAPER...")
+        try:
+            from tools.subject_scraper import SubjectScraper
+            scraper = SubjectScraper("knowledge_base/Master.kml")
+            scraper.process_cluster()
+            st.success("✅ SYSTEM INTEGRITY RESTORED.")
+        except Exception as e:
+            st.error(f"❌ CATASTROPHIC FAILURE: {e}")
+
+check_system_integrity()
 
 # --- SLASH COMMAND HANDLER ---
 async def handle_slash_command(cmd, args):
@@ -101,14 +116,19 @@ if prompt := st.chat_input("Initiate Sovereign Swarm Command..."):
             parts = prompt.split(" ", 1)
             cmd = parts[0]
             args = parts[1] if len(parts) > 1 else ""
-            # Basic Sanitization
-            args = args.replace(";", "").replace("--", "")
+            # --- AGGRESSIVE SANITIZATION ---
+            args = "".join(char for char in args if char in string.printable)
+            args = args.replace(";", "").replace("--", "").replace("`", "")
+
             response = asyncio.run(handle_slash_command(cmd, args))
         else:
             # Default to standard orchestration if not a command
             with st.spinner("INITIATING SWARM COHESION..."):
-                coordinator = OrchestrationCoordinator()
-                response = asyncio.run(coordinator.run(prompt, ""))
+                try:
+                    coordinator = OrchestrationCoordinator()
+                    response = asyncio.run(coordinator.run(prompt, ""))
+                except Exception as e:
+                    response = f"🛡️ SOVEREIGN FALLBACK: {str(e)}"
     except Exception as e:
         response = f"⚠️ CRITICAL SYSTEM FAILURE: {str(e)}"
         st.error(response)
