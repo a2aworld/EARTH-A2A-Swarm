@@ -6,18 +6,27 @@ import jwt
 import os
 import chromadb
 import subprocess
+import string
 from typing import List, Dict, Any
 from google import genai
 from google.genai import types as genai_types
 from dotenv import load_dotenv
 
-# ADK 2.0 Imports
-from google.adk.workflow import Workflow, node, START
-from google.adk import Context
-from google.adk.runners import InMemoryRunner
+# ADK 2.0 Robust Imports
+try:
+    from google.adk.workflow import Workflow, node, START
+    from google.adk import Context
+    from google.adk.runners import InMemoryRunner
+except ImportError:
+    # Diagnostic fallback for Architect's environment
+    print("CRITICAL: google-adk 2.0 modules not found. Ensure 'pip install google-adk==2.0.0b1' was successful.")
+    Workflow = node = START = Context = InMemoryRunner = None
 
 # Registry for Peer Discovery
-from agent_registry import AGENT_REGISTRY
+try:
+    from agent_registry import AGENT_REGISTRY
+except ImportError:
+    AGENT_REGISTRY = {}
 
 load_dotenv()
 MY_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -100,6 +109,8 @@ class OrchestrationCoordinator:
             return f"[{specialty} Unavailable]: {str(e)}"
 
     def define_workflow(self):
+        if Workflow is None: raise RuntimeError("ADK 2.0 Workflow Engine not loaded.")
+
         @node(name="think")
         async def think(ctx: Context, input_data: Dict[str, str]):
             critique = await self.call_agent_a2a("EARTH-CEO", input_data.get('query', ''), "THINK")
@@ -118,7 +129,7 @@ class OrchestrationCoordinator:
                     spatial_context = f"MILESTONE 2: {json.dumps(m2.get('center', [0,0]))}"
             except: pass
 
-            selected = list(AGENT_REGISTRY.keys())[:3] # Indestructible default
+            selected = list(AGENT_REGISTRY.keys())[:3]
             if self.client:
                 try:
                     prompt = f"Critique: {state['ceo_critique']}. Query: {state['query']}. Pick 3 agents from: {list(AGENT_REGISTRY.keys())[:10]}."
@@ -156,11 +167,11 @@ class OrchestrationCoordinator:
         return Workflow(name="SovereignSwarm", edges=[(START, think), (think, plan), (plan, build), (build, review), (review, ship)])
 
     async def run(self, user_query: str, truth_payload: str):
+        if InMemoryRunner is None: return "SYSTEM ERROR: ADK 2.0 Engine Missing."
         try:
             wf = self.define_workflow()
             runner = InMemoryRunner(node=wf)
 
-            # HARDENING: Ensure session exists
             user_id = "earth_arch"
             sess_id = f"s_{int(time.time())}"
             try:

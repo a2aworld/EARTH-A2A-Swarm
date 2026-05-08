@@ -1,5 +1,8 @@
-from google.adk import Agent
-from google.adk.tools import FunctionTool
+try:
+    from google.adk import Agent
+    from google.adk.tools import FunctionTool
+except ImportError:
+    Agent = FunctionTool = None
 
 class CEOAgent:
     def __init__(self):
@@ -10,12 +13,12 @@ class CEOAgent:
         """
         GStack-style Strategic Review of a research mission.
         """
-        # Logic to challenge scope and align with 10-star product vision
         if "MILESTONE 2" in plan_details:
             return f"CEO Strategic Review: Milestone 2 Scaling Detected. Validating Diamond Standard consensus for {plan_details}. ENSURE p-value < 0.01."
         return f"Strategic Review: {plan_details} - CHALLENGE: Is this geoglyph significant enough for the master ledger?"
 
     def get_agent(self):
+        if Agent is None: return None
         return Agent(
             name="EARTH-CEO",
             instruction=f"You are the GStack-inspired CEO of the Genesis Engine. Ethos: {self.ethos}",

@@ -1,5 +1,8 @@
-from google.adk import Agent
-from google.adk.tools import FunctionTool
+try:
+    from google.adk import Agent
+    from google.adk.tools import FunctionTool
+except ImportError:
+    Agent = FunctionTool = None
 
 class DesignEngineerAgent:
     def __init__(self):
@@ -12,6 +15,7 @@ class DesignEngineerAgent:
         return "Design Audit: Checking for AI Slop in the hex-grid and celestial synchronization."
 
     def get_agent(self):
+        if Agent is None: return None
         return Agent(
             name="EARTH-Designer",
             instruction="You are the GStack-inspired Design Engineer. Focus on the 'Mirrored Portal' UI/UX.",
