@@ -26,7 +26,7 @@ DB_PATH = "./vector_db"
 MEMORY_FILE = "./memory/planetary_memory.json"
 # ==========================================
 
-st.set_page_config(page_title="E.A.R.T.H. Sovereign Swarm", layout="wide")
+st.set_page_config(page_title="E.A.R.T.H. Collaborative Agent Network", layout="wide")
 
 # --- UI STYLING (The 'Redacted Oracle' Aesthetic) ---
 st.markdown("""
@@ -104,7 +104,7 @@ if "messages" not in st.session_state: st.session_state.messages = []
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]): st.markdown(msg["content"])
 
-if prompt := st.chat_input("Initiate Sovereign Swarm Command..."):
+if prompt := st.chat_input("Initiate Collaborative Agent Network Command..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"): st.markdown(prompt)
 

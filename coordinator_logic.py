@@ -179,7 +179,7 @@ class OrchestrationCoordinator:
             except: pass
 
             msg = genai_types.Content(role="user", parts=[genai_types.Part(text="Execute")])
-            final = "Sovereign Swarm initialized."
+            final = "Collaborative Agent Network initialized."
 
             async for event in runner.run_async(user_id=user_id, session_id=sess_id, new_message=msg, state_delta={"query": user_query, "context": truth_payload}):
                 if event.output: final = event.output

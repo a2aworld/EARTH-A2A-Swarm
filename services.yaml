@@ -1,0 +1,21 @@
+# E.A.R.T.H. Sovereign Service Configuration
+# Transitions storage from volatile Memory to Persistent Audit Ledger.
+
+services:
+  session_service:
+    # Local SQLite implementation for permanent event/state logging
+    type: "google_adk.sessions.sqlite_session_service.SqliteSessionService"
+    config:
+      # Persistent research trail
+      db_path: "sqlite:///./data/audit_ledger.db"
+
+  artifact_service:
+    # Persistent filesystem storage for generated dossiers and maps
+    type: "google_adk.artifacts.local_artifact_service.LocalArtifactService"
+    config:
+      # Stores KMLs, images, and reports in data/artifacts
+      base_dir: "./data/artifacts"
+
+  memory_service:
+    # Semantic retrieval service for cross-figure correlations
+    type: "google_adk.memory.in_memory_memory_service.InMemoryMemoryService"
