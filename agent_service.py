@@ -1,3 +1,4 @@
+import bootstrap # Sovereign Framework Injection
 from fastapi import FastAPI, Request, HTTPException, Depends
 from fastapi.security import HTTPBearer
 import sys, json, os, jwt, asyncio, httpx, time

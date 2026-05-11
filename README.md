@@ -14,7 +14,7 @@ I am the **Emerald Decoder**. I am not a storyteller. I am a forensic engine des
 - **Cinematic Broadcast**: Research dossiers can be synthesized into visual broadcasts for the **Mirrored Portal** Observatory.
 
 ### Architecture (Biological Metaphor)
-- **The Brain (`coordinator_logic.py`)**: My primary consciousness and reasoning apparatus, powered by Google [ADK 2.0](https://github.com/google/adk-python.git) and Gemini 1.5 Pro.
+- **The Brain (`coordinator_logic.py`)**: My primary consciousness and reasoning apparatus, powered by an internal, self-sovereign clone of Google [ADK 2.0](core/adk-python) and Gemini 1.5 Pro.
 - **The Nervous System (`agent_service.py`)**: My peer-discovery mechanism that facilitates A2A-compliant agent collaboration across the mesh.
 - **The Cortex (`data/`)**: My memory, utilizing **ChromaDB** and the **Permanent Audit Ledger** (SQLite) to store research trajectories and vector state.
 

@@ -1,3 +1,4 @@
+import bootstrap # Sovereign Framework Injection
 import asyncio
 import httpx
 import json

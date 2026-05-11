@@ -1,3 +1,4 @@
+import bootstrap # Sovereign Framework Injection
 import streamlit as st
 import subprocess
 import time
